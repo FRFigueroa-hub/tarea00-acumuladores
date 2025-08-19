@@ -14,7 +14,17 @@ public class Acumuladores {
 	 * @return
 	 */
 	public boolean todosMultiplosEnAlgunaFila(int[][] mat, int num) { 
-		throw new RuntimeException("Metodo no implementado aun!!!");
+		if (mat.length == 0 || num <= 0) return false;
+		
+		boolean existeFilaDeMultiplos = false;
+		for (int i = 0; i < mat.length; i++) {
+			boolean todosMultiplos = true;
+			for (int j = 0; j < mat[0].length; j++) {
+				todosMultiplos = todosMultiplos && mat[i][j]%num == 0;
+			}
+			existeFilaDeMultiplos = existeFilaDeMultiplos || todosMultiplos;
+		}
+		return existeFilaDeMultiplos;
 	}
 	
 	/**
@@ -28,8 +38,24 @@ public class Acumuladores {
 	 * @param mat2
 	 * @return
 	 */
-	public boolean hayInterseccionPorFila(int[][] mat1, int[][]mat2) { 
-		throw new RuntimeException("Metodo no implementado aun!!!");
+	public boolean hayInterseccionPorFila(int[][] mat1, int[][]mat2) {
+		if (mat1.length != mat2.length || mat1.length == 0 || mat2.length == 0) return false;
+		
+		boolean interseccionEnTodasLasFilas = true;
+		for (int i = 0; i < mat1.length; i++) {
+			boolean interseccionEnFila = false;
+			int[] filaMat1 = mat1[i];
+			int[] filaMat2 = mat2[i];
+			
+			for (int j = 0; j < filaMat1.length; j++) {
+				
+				for (int k = 0; k < filaMat2.length; k++) {
+					interseccionEnFila = interseccionEnFila || filaMat1[j] == filaMat2[k];
+				}
+			}
+			interseccionEnTodasLasFilas = interseccionEnTodasLasFilas && interseccionEnFila;
+		}
+		return interseccionEnTodasLasFilas;
 	}
 	
 	/**
@@ -44,8 +70,32 @@ public class Acumuladores {
 	 * @param nColum
 	 * @return
 	 */
-	public boolean algunaFilaSumaMasQueLaColumna(int[][] mat, int nColum) { 
-		throw new RuntimeException("Metodo no implementado aun!!!");
+	public boolean algunaFilaSumaMasQueLaColumna(int[][] mat, int nColum) {
+		if (mat.length == 0 || nColum < 0 || nColum >= mat[0].length) return false;
+		
+		boolean filaSumaMasQueColumna = false;
+		int sumaColumna = 0;
+		
+		for (int i = 0; i < mat.length; i++) {
+			sumaColumna += mat[i][nColum];
+		}
+		
+		int indice = 0;
+		int[] sumasDeFilas = new int[mat.length];
+		
+		for (int i = 0; i < mat.length; i++) {
+			int sum = 0;
+			for (int j = 0; j < mat[0].length; j++) {
+				sum += mat[i][j];
+			}
+			sumasDeFilas[indice] = sum;
+			indice++;
+		}
+		
+		for (int f : sumasDeFilas) {
+			filaSumaMasQueColumna = filaSumaMasQueColumna || f > sumaColumna;
+		}
+		return filaSumaMasQueColumna;
 	}
 	
 	/**
