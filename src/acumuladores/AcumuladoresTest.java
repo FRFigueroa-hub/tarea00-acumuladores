@@ -167,7 +167,6 @@ public class AcumuladoresTest {
 		assertTrue(acum.hayInterseccionPorColumna(mat, mat));
 		assertTrue(acum.hayInterseccionPorColumna(mat, matConInterseccionPorColumna));
 		assertTrue(acum.hayInterseccionPorColumna(matConInterseccionPorColumna, mat));
-
 	}
 
 	@Test
